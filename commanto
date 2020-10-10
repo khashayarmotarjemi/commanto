@@ -1,0 +1,5 @@
+#!/bin/bash
+
+result=`python fetch.py $1`
+
+echo "$result" | fzf
