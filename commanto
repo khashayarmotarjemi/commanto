@@ -1,9 +1,20 @@
 #!/bin/bash
+## commanto! it does stuff with youtube comments
+## this scriptreads the input and runs the
+## python to start getting commands
 
+default_result_count=100
 
-read -p 'url:' url
-read -p "how many? (default is 500): " default_result_count
+if [[ $1 = "test" ]]; then
+    url="https://www.youtube.com/watch?v=ZkNMZlkrzaU&ab_channel=Stephahahan"
+    fetch_count=200
+else
+    read -p 'url:' url
+    read -p "how many? (default is $default_result_count): " fetch_count
+fi
 
-result=$(python /home/khashayar/dev/stuff/commanto/fetch.py $url $default_result_count)
+if [[ -z $fetch_count ]]; then
+    fetch_count=$default_result_count
+fi
 
-echo "$result" | fzf
+python /home/khashayar/dev/stuff/commanto/fetch.py $url $fetch_count
